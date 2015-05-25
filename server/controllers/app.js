@@ -1,13 +1,10 @@
 'use strict';
 
 var User = require('mongoose').model('User'),
-    Boom = require('boom'),
-    server = {};
+    Boom = require('boom');
 
 
-module.exports = function (_server) {
-  server = _server;
-
+module.exports = function (server) {
   [
     {
       method: 'GET',
