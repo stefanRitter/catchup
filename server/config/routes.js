@@ -7,7 +7,7 @@ var Path = require('path'),
 module.exports = function (config, server) {
 
   require('../controllers/auth.js')(server);
-  require('../controllers/app.js')(server);
+  require('../controllers/feed.js')(server);
 
   server.route({
     method: 'GET',
