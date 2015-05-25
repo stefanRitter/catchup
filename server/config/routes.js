@@ -29,8 +29,9 @@ module.exports = function (config, server) {
   server.route({
     method: 'GET',
     path: '/',
-    handler: {
-      file: publicPath + '/index.html'
+    handler: function (request, reply) {
+      // if authenticated redirect to app
+      reply.file(publicPath + '/index.html');
     }
   });
 
