@@ -7,6 +7,7 @@ var Path = require('path'),
 module.exports = function (config, server) {
 
   require('../controllers/auth.js')(server);
+  require('../controllers/app.js')(server);
 
   server.route({
     method: 'GET',
@@ -30,8 +31,11 @@ module.exports = function (config, server) {
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-      // if authenticated redirect to app
-      reply.file(publicPath + '/index.html');
+      if (request.auth.isAuthenticated) {
+        reply.file(Path.join(__dirname, '../../client/app.html'));
+      } else {
+        reply.file(publicPath + '/index.html');
+      }
     }
   });
 

@@ -1,5 +1,3 @@
-/*jshint camelcase: false */
-
 'use strict';
 
 var mongoose = require('mongoose'),
