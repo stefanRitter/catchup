@@ -63,7 +63,6 @@ module.exports = function (grunt) {
       },
       scripts: {
         files: [
-          '*.js',
           'server/**/*.js',
           '!public/**/*.js',
           '!client/**/*.js'
