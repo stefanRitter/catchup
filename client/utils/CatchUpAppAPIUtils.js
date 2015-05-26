@@ -9,9 +9,9 @@ module.exports = {
       url: CategoryStore.nextPageUrl(),
       dataType: 'json'
     }).fail(function (data) {
-      MagazineActions.create(ActionTypes.RECIEVE_MORE_STORIES, data)
+      MagazineActions.create(ActionTypes.RECIEVE_MORE_LINKS, data)
     }).done(function (data) {
-      MagazineActions.create(ActionTypes.RECIEVE_MORE_STORIES, data)
+      MagazineActions.create(ActionTypes.RECIEVE_MORE_LINKS, data)
     });
   },
 
@@ -20,9 +20,9 @@ module.exports = {
       url: CategoryStore.nextPageUrl(),
       dataType: 'json'
     }).fail(function (data) {
-      MagazineActions.create(ActionTypes.RECIEVE_MORE_STORIES, data)
+      MagazineActions.create(ActionTypes.RECIEVE_MORE_LINKS, data)
     }).done(function (data) {
-      MagazineActions.create(ActionTypes.RECIEVE_MORE_STORIES, data)
+      MagazineActions.create(ActionTypes.RECIEVE_MORE_LINKS, data)
     });
   },
 

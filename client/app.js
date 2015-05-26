@@ -6,5 +6,5 @@ window.React = React; // export for http://fb.me/react-devtools
 
 React.render(
     <CatchUpApp />,
-    document.getElementById('#reactApp')
+    document.getElementById('reactApp')
 );

@@ -3,7 +3,7 @@ var keyMirror = require('keymirror');
 module.exports = {
 
   ActionTypes: keyMirror({
-    RECIEVE_MORE_STORIES: null
+    RECIEVE_MORE_LINKS: null
   }),
 
   PayloadSources: keyMirror({
