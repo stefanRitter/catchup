@@ -15,8 +15,8 @@ module.exports = function (grunt) {
       },
       all: [
         '*.js',
-        'client/**/*.js',
         'server/**/*.js',
+        '!client/**/*.js',
         '!public/**/*.js'
       ]
     },
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
           '*.js',
           'server/**/*.js',
           '!public/**/*.js',
-          'client/**/*.js'
+          '!client/**/*.js'
         ],
         tasks: ['jshint:all', 'exec:npmTest']
       }
