@@ -1,7 +1,7 @@
 'use strict';
 
 var Path = require('path'),
-    publicPath = Path.join(__dirname, '../../puplic');
+    publicPath = Path.join(__dirname, '../../public');
 
 
 module.exports = function (config, server) {
@@ -32,7 +32,7 @@ module.exports = function (config, server) {
     path: '/',
     handler: function (request, reply) {
       if (request.auth.isAuthenticated) {
-        reply.file(Path.join(__dirname, '../../client/app.html'));
+        reply.file(publicPath + '/app.html');
       } else {
         reply.file(publicPath + '/index.html');
       }

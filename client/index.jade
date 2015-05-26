@@ -1,0 +1,21 @@
+doctype
+html(lang="en", itemtype="http://schema.org/WebPage" itemscope)
+
+  include common/_head
+
+  body
+    .login-screen
+      .login-screen-content
+        h1.margin-top.bold
+          img(src="/img/icon.png" style="height:1.5em;")
+          br
+          | CatchUp
+
+        h2 Catch up with your Twitter feed while you were asleep.
+
+        .phone-width.center-block
+          a.button.blue.login-button.margin-top-big(href="/loginTwitter" target="_self" style="display:block;")
+            img(src="/img/twitter.svg")
+            span Login with Twitter
+
+    include common/_scripts

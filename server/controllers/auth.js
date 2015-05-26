@@ -4,6 +4,40 @@ var User = require('mongoose').model('User'),
     Boom = require('boom');
 
 
+
+function loginTwitter (request, reply) {
+  var userData = request.auth.credentials;
+
+  User.findOne({_id: userData._id}, function (err, user) {
+    if (err) { return reply(Boom.badImplementation(err)); }
+
+    if (!user) {
+      var userToCreate = {
+        id: userData.profile.id,
+        username: userData.profile.username,
+        displayName: userData.profile.displayName,
+        token: userData.token,
+        secret: userData.secret
+      };
+
+      return User.create(userToCreate, function (err, newUser) {
+        if (err || !newUser) { return reply(Boom.badImplementation(err)); }
+        request.auth.session.set({_id: newUser._id});
+        reply.redirect('/');
+      });
+    }
+
+    request.auth.session.set({_id: user._id});
+    reply.redirect('/');
+  });
+}
+
+function logout (request, reply) {
+  request.auth.session.clear();
+  return reply.redirect('/');
+}
+
+
 module.exports = function (server) {
 
   server.auth.strategy('session', 'cookie', {
@@ -42,37 +76,3 @@ module.exports = function (server) {
   ]
   .forEach(function (route) { server.route(route); });
 };
-
-
-
-function loginTwitter (request, reply) {
-  var userData = request.auth.credentials;
-
-  User.findOne({_id: userData._id}, function (err, user) {
-    if (err) { return reply(Boom.badImplementation(err)); }
-
-    if (!user) {
-      var userToCreate = {
-        id: userData.profile.id,
-        username: userData.profile.username,
-        displayName: userData.profile.displayName,
-        token: userData.token,
-        secret: userData.secret
-      };
-
-      return User.create(userToCreate, function (err, newUser) {
-        if (err || !newUser) { return reply(Boom.badImplementation(err)); }
-        request.auth.session.set({_id: newUser._id});
-        reply.redirect('/feed');
-      });
-    }
-
-    request.auth.session.set({_id: user._id});
-    reply.redirect('/feed');
-  });
-}
-
-function logout (request, reply) {
-  request.auth.session.clear();
-  return reply.redirect('/');
-}

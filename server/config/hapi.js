@@ -10,12 +10,6 @@ module.exports = function (config) {
   var logError = function (err) { if (err) { console.error(err); }};
 
   var loggingOptions = {
-    subscribers: {
-      'console': ['request', 'log', 'error'] // add 'ops' for performance logs
-    }
-  };
-
-  var loggingOptions = {
     opsInterval: 1000,
     reporters: [
       {

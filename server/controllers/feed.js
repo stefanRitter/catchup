@@ -4,6 +4,9 @@ var User = require('mongoose').model('User'),
     Boom = require('boom');
 
 
+function getNextLinks (request, reply) {}
+function getPrevLinks (request, reply) {}
+
 module.exports = function (server) {
   [
     {
@@ -25,7 +28,3 @@ module.exports = function (server) {
   ]
   .forEach(function (route) { server.route(route); });
 };
-
-
-function getNextLinks (request, reply) {}
-function getPrevLinks (request, reply) {}
