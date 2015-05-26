@@ -8,7 +8,7 @@ var User = require('mongoose').model('User'),
 function loginTwitter (request, reply) {
   var userData = request.auth.credentials;
 
-  User.findOne({_id: userData._id}, function (err, user) {
+  User.findOne({id: userData.profile.id}, function (err, user) {
     if (err) { return reply(Boom.badImplementation(err)); }
 
     if (!user) {
@@ -70,6 +70,10 @@ module.exports = function (server) {
       method: 'GET',
       path: '/logout',
       config: {
+        auth: {
+          mode: 'optional',
+          strategy: 'session'
+        },
         handler: logout
       }
     }

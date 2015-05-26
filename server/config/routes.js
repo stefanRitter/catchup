@@ -8,6 +8,7 @@ module.exports = function (config, server) {
 
   require('../controllers/auth.js')(server);
   require('../controllers/feed.js')(server);
+  require('../controllers/home.js')(server);
 
   server.route({
     method: 'GET',
@@ -24,18 +25,6 @@ module.exports = function (config, server) {
     path: '/favicon.ico',
     handler: {
       file: publicPath + 'img/favicon.ico'
-    }
-  });
-
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
-      if (request.auth.isAuthenticated) {
-        reply.file(publicPath + '/app.html');
-      } else {
-        reply.file(publicPath + '/index.html');
-      }
     }
   });
 
