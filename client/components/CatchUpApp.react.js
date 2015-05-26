@@ -11,7 +11,11 @@ var CatchUpApp = React.createClass({
     return {links: [{
       title: "Do Something Different",
       href:"//www.escapethecity.org"
-    }]};
+    },{
+      title: "second link",
+      href:"//blog.escapethecity.org"
+    }
+    ]};
   },
 
   render: function () {

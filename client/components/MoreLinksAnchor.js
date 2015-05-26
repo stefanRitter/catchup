@@ -15,7 +15,7 @@ var MoreLinksAnchor = React.createClass({
   },
 
   _handleClick: function (event) {
-
+    // trigger load more action
   }
 
 });
