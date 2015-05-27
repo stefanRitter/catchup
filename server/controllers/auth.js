@@ -4,7 +4,6 @@ var User = require('mongoose').model('User'),
     Boom = require('boom');
 
 
-
 function loginTwitter (request, reply) {
   var userData = request.auth.credentials;
 
