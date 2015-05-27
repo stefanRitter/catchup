@@ -1,5 +1,5 @@
 test:
-	@NODE_ENV=test node node_modules/lab/bin/lab server/config/__tests__ server/models/__tests__ server/controllers/__tests__
+	@NODE_ENV=test node node_modules/lab/bin/lab server/config/__tests__ server/models/__tests__ server/controllers/__tests__ server/utils/__tests__
 test-cov:
 	@NODE_ENV=test node node_modules/lab/bin/lab test/server -t 100
 test-cov-html:
