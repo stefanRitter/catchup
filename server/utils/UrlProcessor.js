@@ -13,7 +13,7 @@ var UrlProcessor = {
         method: 'GET',
         url: url.url,
         followAllRedirects: true,
-        timeout: 4000,
+        timeout: 1000,
         headers: {
           'User-Agent':
           'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 ' +
@@ -53,6 +53,7 @@ var UrlProcessor = {
 
     urls.forEach(function (url) {
       batch.push(function (done) {
+        console.log(url.url);
         requestAndCleanUrl(url, done);
       });
     });

@@ -46,6 +46,7 @@ schema.methods.updateFeed = function (request, reply) {
       // file/sort in passive or visible links
       // paginate
 
+      links = links.filter(function (link) { return !!link.title; });
       links = links.sort(function (a, b) { return b.rank - a.rank; });
       reply({links: links.splice(0,10)});
     });
