@@ -1,4 +1,4 @@
-var CatchUpApp = require('./components/CatchUpApp.react');
+var CatchUpApp = require('./components/CatchUpApp');
 var CatchUpActionCreator = require('./actions/CatchUpActionCreator')
 var ActionTypes = require('./constants/CatchUpConstants').ActionTypes;
 
