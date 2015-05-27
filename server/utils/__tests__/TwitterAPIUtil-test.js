@@ -41,21 +41,17 @@ var withUrlTweet = {
 describe('TwitterAPIUtil', function () {
 
   var TwitterAPIUtil;
+  var mockTweets = [noUrlTweet, withUrlTweet];
+  var twitStub = {};
 
   beforeEach(function (done) {
     TwitterAPIUtil = require('../TwitterAPIUtil');
-
-    var twitStub = {
-      get: function (type, query, callback) {}
-    };
-
     TwitterAPIUtil.getAPIAuth = Sinon.stub().returns(twitStub);
     done();
   });
 
 
   it('ignores tweets without url entities', function (done) {
-    var mockTweets = [noUrlTweet, withUrlTweet];
     mockTweets.forEach(TwitterAPIUtil.extractUrlFromTweet.bind(TwitterAPIUtil));
     expect(TwitterAPIUtil.newLinks.length).to.equal(1);
     done();
@@ -67,4 +63,9 @@ describe('TwitterAPIUtil', function () {
     done();
   });
 
+  it(
+    var twitStub = {
+      get: function (type, query, callback) { callback(false, mockTweets, {statusCode: 200})}
+    };
+  )
 });
