@@ -27,11 +27,11 @@ var withUrlTweet = {
   'retweet_count': 2,
   'favorite_count': 10,
   'entities': {
-    "urls":[{
-      "indices":[32,52],
-      "url":"http:\/\/t.co\/IOwBrTZR",
-      "display_url":"youtube.com\/watch?v=oHg5SJ\u2026",
-      "expanded_url":"http:\/\/www.youtube.com\/watch?v=oHg5SJYRHA0"
+    'urls':[{
+      'indices':[32,52],
+      'url':'http:\/\/t.co\/IOwBrTZR',
+      'display_url':'youtube.com\/watch?v=oHg5SJ\u2026',
+      'expanded_url':'http:\/\/www.youtube.com\/watch?v=oHg5SJYRHA0'
     }]
   }
 };
@@ -63,7 +63,7 @@ describe('TwitterAPIUtil', function () {
     done();
   });
 
-  it('it calls twitter and filters the result', function (done) {
+  it('should call twitter and filter the result', function (done) {
     twitStub.get = function (type, query, callback) { callback(false, mockTweets, {statusCode: 200}); };
 
     TwitterAPIUtil.retrieveUrlsFromRecentTweets({id: 'test', secret:'1', token:'2'}, function (err, links) {
