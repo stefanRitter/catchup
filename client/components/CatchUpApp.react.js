@@ -9,7 +9,7 @@ var LinkStore = require('../stores/LinkStore');
 var CatchUpApp = React.createClass({
 
   getInitialState: function () {
-    return {links: []};
+    return {links: [], currentPage: 0};
   },
 
   componentDidMount: function() {
@@ -21,12 +21,16 @@ var CatchUpApp = React.createClass({
   },
 
   render: function () {
+    var prevButton = <MoreLinksAnchor anchorName="Prev" />;
+    var nextButton = <MoreLinksAnchor anchorName="Next" />;
+
+    if (this.state.currentPage === 0) { nextButton = undefined; }
 
     return (
       <div className="app-view">
         <header>
-          <MoreLinksAnchor anchorName="Prev" />
-          <MoreLinksAnchor anchorName="Next" />
+          {prevButton}
+          {nextButton}
         </header>
 
         {this.state.links.map(function (link) {
@@ -39,7 +43,10 @@ var CatchUpApp = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({links: LinkStore.getLinks()});
+    this.setState({
+      links: LinkStore.getLinks(),
+      currentPage: LinkStore.getCurrentPage()
+    });
   }
 
 });

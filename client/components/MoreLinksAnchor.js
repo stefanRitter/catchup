@@ -7,7 +7,7 @@ var MoreLinksAnchor = React.createClass({
   },
 
   render: function () {
-    var className = "button green load-more "+this.props.anchorName;
+    var className = "button red load-more "+this.props.anchorName;
 
     return (
       <div className={className} onClick={this._handleClick}>{this.props.anchorName}</div>
