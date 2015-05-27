@@ -5,7 +5,7 @@ var User = require('mongoose').model('User'),
 
 
 function getLinks (request, reply) {
-  var links = [{
+  /*var links = [{
       title: 'Do Something Different',
       href: '//www.escapethecity.org'
     },{
@@ -13,15 +13,15 @@ function getLinks (request, reply) {
       href: '//blog.escapethecity.org'
     }
   ];
-  reply({links: links});
+  reply({links: links});*/
 
-  /*var userData = request.auth.credentials;
+  var userData = request.auth.credentials;
 
   User.findOne({_id: userData._id}, function (err, user) {
     if (err || !user) { return reply(Boom.badImplementation(err)); }
 
     user.updateFeed(request, reply);
-  });*/
+  });
 }
 
 module.exports = function (server) {
