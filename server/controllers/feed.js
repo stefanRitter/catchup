@@ -7,10 +7,10 @@ var User = require('mongoose').model('User'),
 function getLinks (request, reply) {
   /*var links = [{
       title: 'Do Something Different',
-      href: '//www.escapethecity.org'
+      url: '//www.escapethecity.org'
     },{
       title: 'second link',
-      href: '//blog.escapethecity.org'
+      url: '//blog.escapethecity.org'
     }
   ];
   reply({links: links});*/

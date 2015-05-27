@@ -10,8 +10,9 @@ var LinkPartial = React.createClass({
     var link = this.props.link;
 
     return (
-      <a className="link-partial" target="_blank" href={link.href}>
-        {link.title}
+      <a className="link-partial" target="_blank" href={link.url}>
+        <div className="link-partial-title">{link.title}</div>
+        <div className="link-partial-rank">Rank: {link.rank}</div>
       </a>
     );
   }

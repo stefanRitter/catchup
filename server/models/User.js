@@ -17,7 +17,7 @@ var schema = mongoose.Schema({
 
   visibleLinks: [
     {
-      href: String,
+      url: String,
       title: String,
       rank: Number,
       tweets: [String]
@@ -26,7 +26,7 @@ var schema = mongoose.Schema({
 
   passiveLinks: [
     {
-      href: String,
+      url: String,
       title: String,
       rank: Number,
       tweets: [String]
@@ -43,10 +43,11 @@ schema.methods.updateFeed = function (request, reply) {
       if (err) { return reply(Boom.badImplementation(err)); }
 
       // TODO:
-      // file in passive or visible links
-      // sort by rank reply with top ten
+      // file/sort in passive or visible links
+      // paginate
 
-      console.log(err, links);
+      links = links.sort(function (a, b) { return b.rank - a.rank; });
+      reply({links: links.splice(0,10)});
     });
   }.bind(this));
 };

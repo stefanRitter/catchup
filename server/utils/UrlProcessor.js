@@ -8,9 +8,6 @@ var request = require('request'),
 var UrlProcessor = {
 
   requestAndCleanUrl: function (url, done) {
-    var newLink;
-
-    // request
     request(
       {
         method: 'GET',

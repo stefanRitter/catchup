@@ -45,7 +45,7 @@ var TwitterAPIUtil = {
 
     var query = {
       include_entities: true,
-      count: 50 // max: 100
+      count: 20 // max: 100
     };
 
     twit.get('/statuses/home_timeline.json', query, function (err, data, res) {
@@ -67,6 +67,7 @@ var TwitterAPIUtil = {
 
     this.user = user;
     this.callback = callback;
+    this.newLinks = [];
     this.getTweets();
   }
 
