@@ -40,12 +40,12 @@ var withUrlTweet = {
 
 describe('TwitterAPIUtil', function () {
 
-  var TwitterAPIUtil;
+  var TwitterAPIUtil = require('../TwitterAPIUtil');
   var mockTweets = [noUrlTweet, withUrlTweet];
   var twitStub = {};
 
   beforeEach(function (done) {
-    TwitterAPIUtil = require('../TwitterAPIUtil');
+    TwitterAPIUtil.newLinks = [];
     TwitterAPIUtil.getAPIAuth = Sinon.stub().returns(twitStub);
     done();
   });
@@ -63,9 +63,13 @@ describe('TwitterAPIUtil', function () {
     done();
   });
 
-  it(
-    var twitStub = {
-      get: function (type, query, callback) { callback(false, mockTweets, {statusCode: 200})}
-    };
-  )
+  it('it calls twitter and filters the result', function (done) {
+    twitStub.get = function (type, query, callback) { callback(false, mockTweets, {statusCode: 200}); };
+
+    TwitterAPIUtil.retrieveUrlsFromRecentTweets({id: 'test', secret:'1', token:'2'}, function (err, links) {
+      expect(links.length).to.equal(1);
+      done();
+    });
+  });
+
 });
