@@ -37,7 +37,7 @@ var CatchUpApp = React.createClass({
         </header>
 
         {this.state.links.map(function (link) {
-          return <LinkPartial link={link} key={link.href} />
+          return <LinkPartial link={link} key={link.url} />
         })}
 
         <LoadingSpinner display={this.state.links.length === 0} />
