@@ -24,7 +24,10 @@ var CatchUpApp = React.createClass({
     var prevButton = <MoreLinksAnchor anchorName="Prev" />;
     var nextButton = <MoreLinksAnchor anchorName="Next" />;
 
-    if (this.state.currentPage === 0) { nextButton = undefined; }
+    if (this.state.currentPage === 0) {
+      nextButton = undefined;
+      prevButton = undefined;
+    }
 
     return (
       <div className="app-view">
