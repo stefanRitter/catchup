@@ -3,6 +3,7 @@ var keyMirror = require('keymirror');
 module.exports = {
 
   ActionTypes: keyMirror({
+    INIT: null,
     RECIEVE_MORE_LINKS: null
   }),
 

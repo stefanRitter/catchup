@@ -4,18 +4,20 @@ var MoreLinksAnchor = require('./MoreLinksAnchor');
 var LinkPartial = require('./LinkPartial');
 var LoadingSpinner = require('./LoadingSpinner');
 
+var LinkStore = require('../stores/LinkStore');
 
 var CatchUpApp = React.createClass({
 
-  getDefaultProps: function () {
-    return {links: [{
-      title: "Do Something Different",
-      href:"//www.escapethecity.org"
-    },{
-      title: "second link",
-      href:"//blog.escapethecity.org"
-    }
-    ]};
+  getInitialState: function () {
+    return {links: []};
+  },
+
+  componentDidMount: function() {
+    LinkStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    LinkStore.removeChangeListener(this._onChange);
   },
 
   render: function () {
@@ -27,13 +29,17 @@ var CatchUpApp = React.createClass({
           <MoreLinksAnchor anchorName="Next" />
         </header>
 
-        {this.props.links.map(function (link) {
+        {this.state.links.map(function (link) {
           return <LinkPartial link={link} key={link.href} />
         })}
 
-        <LoadingSpinner display={this.props.links.length === 0} />
+        <LoadingSpinner display={this.state.links.length === 0} />
       </div>
     );
+  },
+
+  _onChange: function () {
+    this.setState({links: LinkStore.getLinks()});
   }
 
 });

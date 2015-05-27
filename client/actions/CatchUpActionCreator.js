@@ -1,20 +1,25 @@
 var CatchUpAppDispatcher = require('../dispatcher/CatchUpAppDispatcher');
 var ActionTypes = require('../constants/CatchUpConstants').ActionTypes;
 
+
 module.exports = {
 
-  receiveAll: function (rawMessages) {
+  INIT: function () {
     CatchUpAppDispatcher.handleServerAction({
-      type: ActionTypes.RECEIVE_RAW_MESSAGES,
-      rawMessages: rawMessages
+      type: ActionTypes.INIT,
+      data: {}
     });
   },
 
-  receiveCreatedMessage: function (createdMessage) {
+  RECIEVE_MORE_LINKS: function (data) {
     CatchUpAppDispatcher.handleServerAction({
-      type: ActionTypes.RECEIVE_RAW_CREATED_MESSAGE,
-      rawMessage: createdMessage
+      type: ActionTypes.RECIEVE_MORE_LINKS,
+      data: data
     });
+  },
+
+  create: function (action, data) {
+    this[action](data);
   }
 
 };
