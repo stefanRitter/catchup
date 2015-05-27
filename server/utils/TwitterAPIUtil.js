@@ -18,7 +18,7 @@ var TwitterAPIUtil = {
     });
   },
 
-  extractUrlFromTweet: function (rawTweet) {
+  extractUrlFromTweet: function (tweet) {
     if (tweet.entities.urls && tweet.entities.urls.length > 0) {
       var link = tweet.entities.urls[0],
           url = link.expanded_url || link.url;

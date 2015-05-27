@@ -13,6 +13,31 @@ var after = lab.after;
 var expect = Code.expect;
 
 
+var noUrlTweet = {
+  'id': '1',
+  'entities': {
+    'hashtags': [],
+    'urls': [],
+    'user_mentions': []
+  }
+};
+
+var withUrlTweet = {
+  'id': '2',
+  'retweet_count': 2,
+  'favorite_count': 10,
+  'entities': {
+    "urls":[{
+      "indices":[32,52],
+      "url":"http:\/\/t.co\/IOwBrTZR",
+      "display_url":"youtube.com\/watch?v=oHg5SJ\u2026",
+      "expanded_url":"http:\/\/www.youtube.com\/watch?v=oHg5SJYRHA0"
+    }]
+  }
+};
+
+
+
 describe('TwitterAPIUtil', function () {
 
   var TwitterAPIUtil;
@@ -21,14 +46,25 @@ describe('TwitterAPIUtil', function () {
     TwitterAPIUtil = require('../TwitterAPIUtil');
 
     var twitStub = {
-      get: function (type, query, callback) {
-
-      }
+      get: function (type, query, callback) {}
     };
 
-    TwitterAPIUtil.getAPIAuth = sinon.stub().returns(twitStub);
+    TwitterAPIUtil.getAPIAuth = Sinon.stub().returns(twitStub);
     done();
   });
 
+
+  it('ignores tweets without url entities', function (done) {
+    var mockTweets = [noUrlTweet, withUrlTweet];
+    mockTweets.forEach(TwitterAPIUtil.extractUrlFromTweet.bind(TwitterAPIUtil));
+    expect(TwitterAPIUtil.newLinks.length).to.equal(1);
+    done();
+  });
+
+  it('should calculate the correct rank', function (done) {
+    TwitterAPIUtil.extractUrlFromTweet(withUrlTweet);
+    expect(TwitterAPIUtil.newLinks[0].rank).to.equal(3);
+    done();
+  });
 
 });
