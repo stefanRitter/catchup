@@ -15,5 +15,20 @@ var expect = Code.expect;
 
 describe('TwitterAPIUtil', function () {
 
+  var TwitterAPIUtil;
+
+  beforeEach(function (done) {
+    TwitterAPIUtil = require('../TwitterAPIUtil');
+
+    var twitStub = {
+      get: function (type, query, callback) {
+
+      }
+    };
+
+    TwitterAPIUtil.getAPIAuth = sinon.stub().returns(twitStub);
+    done();
+  });
+
 
 });
