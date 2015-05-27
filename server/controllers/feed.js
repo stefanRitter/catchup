@@ -14,6 +14,14 @@ function getLinks (request, reply) {
     }
   ];
   reply({links: links});
+
+  /*var userData = request.auth.credentials;
+
+  User.findOne({_id: userData._id}, function (err, user) {
+    if (err || !user) { return reply(Boom.badImplementation(err)); }
+
+    user.updateFeed(request, reply);
+  });*/
 }
 
 module.exports = function (server) {
