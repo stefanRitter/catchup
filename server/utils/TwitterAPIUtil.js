@@ -3,38 +3,73 @@
 
 var Twitter = require('twitter');
 
-var TwitterAPIUtil = {};
+var newLinks = [],
+    callback,
+    user;
 
 
-function getAPIAuth (user) {
-  return new Twitter({
-    consumer_key: process.env.TWIT_KEY || 'empty',
-    consumer_secret: process.env.TWIT_SECRET || 'empty',
-    access_token_key: user.token,
-    access_token_secret: user.secret
-  });
-}
+var TwitterAPIUtil = {
 
-function cleanTweet (rawTweet) {
-  var pics = rawTweet.extended_entities.media.map(function (e) {
-              if (e.type === 'photo') { return e.media_url; }
-             });
+  getAPIAuth: function () {
+    return new Twitter({
+      consumer_key: process.env.TWIT_KEY || 'empty',
+      consumer_secret: process.env.TWIT_SECRET || 'empty',
+      access_token_key: user.token,
+      access_token_secret: user.secret
+    });
+  },
 
-  var profile_image_url = rawTweet.user.profile_image_url;
-  if (!!rawTweet.retweeted_status) {
-    profile_image_url = rawTweet.retweeted_status.user.profile_image_url;
+  extractUrlFromTweet: function (rawTweet) {
+    if (tweet.entities.urls && tweet.entities.urls.length > 0) {
+      var link = tweet.entities.urls[0],
+          url = link.expanded_url || link.url;
+
+      // update rank
+      var favs = tweet.favorite_count * 0.1 || 0,
+          retweets = tweet.retweet_count || 0,
+          rank = favs + retweets;
+
+      if (!!tweet.in_reply_to_status_id) {
+        rank += 1;
+      }
+
+      newLinks.push({
+        id: tweet.id,
+        url: url,
+        rank: rank
+      });
+    }
+  },
+
+  getTweets: function () {
+    var twit = this.getAPIAuth();
+
+    var query = {
+      include_entities: true,
+      count: 100
+    };
+
+    twit.get('/statuses/home_timeline.json', query, function (err, data, res) {
+      if (res.statusCode !== 200 || !!err) {
+        return callback('Error while getting tweets');
+      }
+
+      data.forEach(this.extractUrlFromTweet);
+      console.log('tweets found: ', data.length, ' links found: ', newLinks.length);
+
+      callback(false, newLinks);
+
+    }.bind(this));
+  },
+
+  retrieveUrlsFromRecentTweets: function (_user, _callback) {
+    user = _user;
+    callback = cb;
+
+    console.log('TwitterAPIUtil: updating ' + _user.id);
+    getTweets();
   }
 
-  return {
-    id_str:             rawTweet.id_str,
-    created_at:         rawTweet.created_at,
-    url:                'http://twitter.com/'+rawTweet.user.id_str+'/status/'+rawTweet.id_str,
-    profile_image_url:  profile_image_url,
-    text:               rawTweet.text,
-    retweet_count:      rawTweet.retweet_count  || 0,
-    favorite_count:     rawTweet.favorite_count || 0,
-    pics:               pics
-  };
-}
+};
 
 module.exports = TwitterAPIUtil;
