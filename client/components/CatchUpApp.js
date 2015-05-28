@@ -25,6 +25,7 @@ var CatchUpApp = React.createClass({
     var nextButton = <MoreLinksAnchor anchorName="Next" />;
 
     if (this.state.currentPage === 0) {
+      // TODO: build pagination
       nextButton = undefined;
       prevButton = undefined;
     }

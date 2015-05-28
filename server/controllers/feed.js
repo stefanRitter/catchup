@@ -5,16 +5,6 @@ var User = require('mongoose').model('User'),
 
 
 function getLinks (request, reply) {
-  /*var links = [{
-      title: 'Do Something Different',
-      url: '//www.escapethecity.org'
-    },{
-      title: 'second link',
-      url: '//blog.escapethecity.org'
-    }
-  ];
-  reply({links: links});*/
-
   var userData = request.auth.credentials;
 
   User.findOne({_id: userData._id}, function (err, user) {
@@ -23,6 +13,7 @@ function getLinks (request, reply) {
     user.updateFeed(request, reply);
   });
 }
+
 
 module.exports = function (server) {
   [
