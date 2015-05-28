@@ -1,14 +1,15 @@
 'use strict';
 
-var request = require('request'),
-    cheerio = require('cheerio'),
+var cheerio = require('cheerio'),
     Batch = require('batch');
 
 
 var UrlProcessor = {
 
+  request: require('request'),
+
   requestAndCleanUrl: function (url, done) {
-    request(
+    this.request(
       {
         method: 'GET',
         url: url.url,
@@ -47,7 +48,7 @@ var UrlProcessor = {
     console.log('UrlProcessor: processing ' + urls.length);
 
     var batch = new Batch(),
-        requestAndCleanUrl = this.requestAndCleanUrl;
+        requestAndCleanUrl = this.requestAndCleanUrl.bind(this);
 
     batch.concurrency(4);
 
